@@ -30,9 +30,9 @@ const UserForm = ({ userData, roles }: UserFormProps) => {
         <InputError message={errors.name} />
       </div>
       <div className="grid gap-2">
-        <Label htmlFor="email">Email</Label>
-        <Input id="email" name="email" value={data.email} onChange={(e) => setData('email', e.target.value)} />
-        <InputError message={errors.email} />
+        <Label htmlFor="username">Username</Label>
+        <Input id="username" name="username" value={data.username} onChange={(e) => setData('username', e.target.value)} />
+        <InputError message={errors.username} />
       </div>
       <div className="grid gap-2">
         <Label htmlFor="password">Password</Label>

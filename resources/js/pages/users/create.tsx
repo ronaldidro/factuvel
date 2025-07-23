@@ -19,7 +19,7 @@ export default function CreateUserPage({ roles }: { roles: string[] }) {
           userData={{
             id: null,
             name: '',
-            email: '',
+            username: '',
             password: '',
             password_confirmation: '',
             role: '',

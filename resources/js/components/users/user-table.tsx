@@ -14,7 +14,7 @@ export const UserTable = ({ users, canEdit, canDelete }: { users: User[]; canEdi
           <TableRow>
             <TableHead>ID</TableHead>
             <TableHead>Name</TableHead>
-            <TableHead>Email</TableHead>
+            <TableHead>Username</TableHead>
             <TableHead>Roles</TableHead>
             <TableHead>Created at</TableHead>
             <TableHead>Actions</TableHead>
@@ -25,7 +25,7 @@ export const UserTable = ({ users, canEdit, canDelete }: { users: User[]; canEdi
             <TableRow key={user.id}>
               <TableCell>{user.id}</TableCell>
               <TableCell>{user.name}</TableCell>
-              <TableCell>{user.email}</TableCell>
+              <TableCell>{user.username}</TableCell>
               <TableCell>
                 <div className="flex gap-2">
                   {user.roles.map((role) => (

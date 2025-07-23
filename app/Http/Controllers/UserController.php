@@ -70,7 +70,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        $user = User::find($id, ['id', 'name', 'email']);
+        $user = User::find($id, ['id', 'name', 'username']);
 
         return Inertia::render("users/edit", [
             "user" => $user,

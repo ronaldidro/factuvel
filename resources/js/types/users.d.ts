@@ -1,7 +1,7 @@
 export interface UserForm {
   id: number | null;
   name: string;
-  email: string;
+  username: string;
   password: string;
   password_confirmation: string;
   role: string;

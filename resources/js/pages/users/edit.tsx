@@ -19,7 +19,7 @@ export default function EditUserPage({ user, role, roles }: { user: User; role: 
           userData={{
             id: user.id ?? null,
             name: user.name ?? '',
-            email: user.email ?? '',
+            username: user.username ?? '',
             password: '',
             password_confirmation: '',
             role: role ?? '',

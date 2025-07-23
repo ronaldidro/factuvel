@@ -22,10 +22,13 @@ class DatabaseSeeder extends Seeder
         $adminRole = Role::firstOrCreate(['name' => 'admin']);
         $adminRole->syncPermissions($permissions);
 
-        $adminUser = User::firstOrCreate(
-            ['email' => 'admin@mail.com'],
-            ['name' => 'Admin', 'password' => Hash::make('admin123')]
-        );
+        $adminUser = User::firstOrCreate([
+            'name' => 'Admin',
+            'email' => 'admin@mail.com',
+            'username' => 'admin',
+            'password' => Hash::make('admin123')
+        ]);
+
         $adminUser->assignRole($adminRole);
     }
 }

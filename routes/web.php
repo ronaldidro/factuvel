@@ -27,6 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::middleware('permission:users.edit')->group(function () {
             Route::get('{user}/edit', [UserController::class, 'edit'])->name('edit');
             Route::put('{user}', [UserController::class, 'update'])->name('update');
+            Route::patch('{user}/toggle-status', [UserController::class, 'toggle_status'])->name('toggle-status');
         });
 
         Route::middleware('permission:users.delete')->group(function () {

@@ -68,12 +68,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        $user = User::find($id, ['id', 'name', 'username']);
-
         return Inertia::render("users/edit", [
-            "user" => $user,
+            "user" => $user->only(['id', 'name', 'username']),
             "role" => $user->getRoleNames()?->last(),
             "roles" => Role::pluck("name")
         ]);
@@ -82,10 +80,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserUpdateRequest $request, string $id)
+    public function update(UserUpdateRequest $request, User $user)
     {
-        $user = User::findOrFail($id);
-
         $data = $request->validated();
 
         if (!empty($data['password'])) {
@@ -103,10 +99,16 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        $user = User::findOrFail($id);
         $user->delete();
         return to_route("users.index");
+    }
+
+    public function toggle_status(User $user)
+    {
+        $user->active = !$user->active;
+        $user->save();
+        return back();
     }
 }

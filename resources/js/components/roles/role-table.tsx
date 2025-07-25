@@ -1,10 +1,10 @@
-import { DeleteAlertDialog } from '@/components/delete-alert-dialog';
+import { ConfirmDialog } from '@/components/confirm-dialog';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import type { Role } from '@/types/roles';
 import { Link, router } from '@inertiajs/react';
-import { SquarePen } from 'lucide-react';
+import { SquarePen, Trash2 } from 'lucide-react';
 
 export const RoleTable = ({ roles, canEdit, canDelete }: { roles: Role[]; canEdit: boolean; canDelete: boolean }) => {
   return (
@@ -43,11 +43,16 @@ export const RoleTable = ({ roles, canEdit, canDelete }: { roles: Role[]; canEdi
                     </Button>
                   )}
                   {canDelete && (
-                    <DeleteAlertDialog
+                    <ConfirmDialog
                       title="Are you absolutely sure?"
                       description="This action cannot be undone. This will permanently delete this role and remove its data."
                       onConfirm={() => router.delete(route('roles.destroy', role.id))}
-                    />
+                    >
+                      <Button variant="destructive" size="sm" className="cursor-pointer">
+                        <Trash2 />
+                        Delete
+                      </Button>
+                    </ConfirmDialog>
                   )}
                 </div>
               </TableCell>

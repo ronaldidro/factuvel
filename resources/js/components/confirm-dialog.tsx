@@ -9,22 +9,26 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import { Button } from '@/components/ui/button';
-import { Trash2 } from 'lucide-react';
+import { ReactNode } from 'react';
 
-export const DeleteAlertDialog = ({ title, description, onConfirm }: { title: string; description: string; onConfirm: () => void }) => {
+export const ConfirmDialog = ({
+  title,
+  description,
+  onConfirm,
+  children,
+}: {
+  title: string;
+  description: string;
+  onConfirm: () => void;
+  children: ReactNode;
+}) => {
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button variant="destructive" size="sm">
-          <Trash2 />
-          Delete
-        </Button>
-      </AlertDialogTrigger>
+      <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>
-          <AlertDialogDescription>{description}</AlertDialogDescription>
+          {description && <AlertDialogDescription>{description}</AlertDialogDescription>}
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>

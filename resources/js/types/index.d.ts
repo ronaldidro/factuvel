@@ -39,9 +39,10 @@ export interface User {
   name: string;
   username: string;
   email: string;
-  roles: Role[];
+  role: Role;
   avatar?: string;
   email_verified_at: string | null;
+  status: string;
   created_at: string;
   updated_at: string;
   [key: string]: unknown; // This allows for additional properties...

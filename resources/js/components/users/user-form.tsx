@@ -60,7 +60,7 @@ const UserForm = ({ userData, roles }: UserFormProps) => {
         />
         <InputError message={errors.role} />
       </div>
-      <Button type="submit" disabled={processing}>
+      <Button type="submit" disabled={processing} className="w-full">
         {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
         Save
       </Button>

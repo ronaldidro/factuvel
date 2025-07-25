@@ -48,7 +48,7 @@ const RoleForm = ({ roleData, permissions }: RoleFormProps) => {
         ))}
         <InputError message={errors.permissions} />
       </div>
-      <Button type="submit" disabled={processing}>
+      <Button type="submit" disabled={processing} className="w-full">
         {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
         Save
       </Button>

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\RoleResource;
+use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
@@ -74,10 +75,8 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Role $role)
     {
-        $role = Role::findOrFail($id);
-
         return Inertia::render(
             "roles/edit",
             [
@@ -91,7 +90,7 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Role $role)
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:20'],
@@ -99,7 +98,6 @@ class RoleController extends Controller
             'permissions.*' => ['string', 'exists:permissions,name'],
         ]);
 
-        $role = Role::findOrFail($id);
         $role->update($validated);
         $role->syncPermissions($validated['permissions']);
 
@@ -109,10 +107,13 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Role $role)
     {
-        $role = Role::findOrFail($id);
-        $role->delete();
-        return to_route("roles.index");
+        try {
+            $role->delete();
+            return to_route("roles.index");
+        } catch (\Exception $e) {
+            throw ValidationException::withMessages(['message' => $e->getMessage()]);
+        }
     }
 }

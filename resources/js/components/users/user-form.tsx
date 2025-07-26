@@ -36,7 +36,7 @@ const UserForm = ({ userData, roles }: UserFormProps) => {
       </div>
       <div className="grid gap-2">
         <Label htmlFor="password">Password</Label>
-        <Input id="password" name="password" type="password" value={data.password} onChange={(e) => setData('password', e.target.value)} />
+        <Input id="password" name="password" value={data.password} onChange={(e) => setData('password', e.target.value)} />
         <InputError message={errors.password} />
       </div>
       <div className="grid gap-2">
@@ -44,7 +44,6 @@ const UserForm = ({ userData, roles }: UserFormProps) => {
         <Input
           id="password_confirmation"
           name="password_confirmation"
-          type="password"
           value={data.password_confirmation}
           onChange={(e) => setData('password_confirmation', e.target.value)}
         />

@@ -54,7 +54,7 @@ class UserController extends Controller
         $user = User::create($data);
         $user->syncRoles($data['role']);
 
-        return to_route("users.index");
+        return to_route("users.index")->with("success", "User added successfully");
     }
 
     /**
@@ -93,7 +93,7 @@ class UserController extends Controller
         $user->update($data);
         $user->syncRoles($data['role']);
 
-        return to_route('users.index');
+        return to_route('users.index')->with("success", "User updated successfully");
     }
 
     /**
@@ -102,13 +102,13 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return to_route("users.index");
+        return to_route("users.index")->with("success", "User deleted successfully");
     }
 
     public function toggle_status(User $user)
     {
         $user->active = !$user->active;
         $user->save();
-        return back();
+        return back()->with("success", "User status updated successfully");
     }
 }

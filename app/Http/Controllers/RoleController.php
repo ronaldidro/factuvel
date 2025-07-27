@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Resources\RoleResource;
 use App\Models\Role;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Spatie\Permission\Models\Permission;
 
@@ -61,7 +60,7 @@ class RoleController extends Controller
         $role = Role::create(['name' => $validated['name']]);
         $role->syncPermissions($validated['permissions']);
 
-        return to_route("roles.index");
+        return to_route("roles.index")->with("success", "Role added successfully");
     }
 
     /**
@@ -101,7 +100,7 @@ class RoleController extends Controller
         $role->update($validated);
         $role->syncPermissions($validated['permissions']);
 
-        return to_route("roles.index");
+        return to_route("roles.index")->with("success", "Role updated successfully");
     }
 
     /**
@@ -111,9 +110,9 @@ class RoleController extends Controller
     {
         try {
             $role->delete();
-            return to_route("roles.index");
+            return to_route("roles.index")->with("success", "Role deleted successfully");
         } catch (\Exception $e) {
-            throw ValidationException::withMessages(['message' => $e->getMessage()]);
+            return to_route("roles.index")->with('error', $e->getMessage());
         }
     }
 }
